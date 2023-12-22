@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    default: local
+
+  config:
+    import:
+      - db.yml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+

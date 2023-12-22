@@ -1,0 +1,12 @@
+dependencies {
+    //스프링 빈으로 등록하기 위해서 추가
+    implementation 'org.springframework:spring-context'
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

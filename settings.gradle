@@ -1,0 +1,5 @@
+rootProject.name = 'shop'
+
+include 'core:core-api'
+include 'core:core-domain'
+include 'storage:storage-db'
