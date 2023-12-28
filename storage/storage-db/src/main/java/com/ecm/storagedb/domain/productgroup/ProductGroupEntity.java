@@ -1,5 +1,6 @@
 package com.ecm.storagedb.domain.productgroup;
 
+import com.ecm.storagedb.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,35 +9,38 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "product_groups")
+@Table(
+        name = "product_groups",
+        indexes = {@Index(name = "products_group_name_ix", columnList = "name")}
+)
 @Entity
-public class ProductGroupEntity {
+public class ProductGroupEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "keyword",  nullable = false, length = 30)
-    private String keyword;
-
-    @Column(name = "code",  nullable = false, length = 30)
+    @Column(nullable = false, length = 10)
     private String code;
+
+    @Column(nullable = false, length = 50)
+    private String name;
 
     @Builder
     private ProductGroupEntity(
-            String keyword,
-            String code
+            String code,
+            String name
     ) {
-        this.keyword = keyword;
         this.code = code;
+        this.name = name;
     }
 
     public static ProductGroupEntity create(
-            String keyword,
-            String code
+            String code,
+            String name
     ) {
         return ProductGroupEntity.builder()
-                .keyword(keyword)
                 .code(code)
+                .name(name)
                 .build();
     }
 }
