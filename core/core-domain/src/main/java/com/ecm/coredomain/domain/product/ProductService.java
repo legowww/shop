@@ -1,27 +1,23 @@
 package com.ecm.coredomain.domain.product;
 
 
-import com.ecm.coredomain.domain.productgroup.ProductGroupReader;
-import com.ecm.coredomain.domain.productgroup.ProductGroupSearchResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
 public class ProductService {
 
-    private final ProductGroupReader productGroupReader;
-    private final ApplicationEventPublisher applicationEventPublisher;
+    private final LowPriceProductSearcher lowPriceProductSearcher;
 
-    public ProductGroupSearchResponse search(
-            String inputText,
-            Integer page,
-            Integer size
+    public LowPriceProductSearchResponse keywordSearch(
+            String keyword
     ) {
-        //Event -> inputText 레디스 검색 랭킹 서버
-        applicationEventPublisher.publishEvent(inputText);
+        List<ProductGroupMainLowPriceProduct> result = lowPriceProductSearcher.search(keyword);
 
-        return productGroupReader.read(inputText, page, size);
+        return new LowPriceProductSearchResponse(result);
     }
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Embeddable
-public class ProductInfo {
+public class ProductSpec {
 
     @Column(nullable = false, length = 50)
     private String name;

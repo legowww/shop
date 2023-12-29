@@ -1,7 +1,9 @@
 package com.ecm.coredomain.domain.productgroup;
 
 
+import java.util.List;
+
 public interface ProductGroupSearchDao {
 
-    ProductGroupSearchResponse searchThroughInputText(String inputText, Integer page, Integer size);
+    List<ProductGroup> searchThroughInputText(String inputText);
 }

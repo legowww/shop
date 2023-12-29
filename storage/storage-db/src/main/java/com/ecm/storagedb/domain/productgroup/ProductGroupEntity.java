@@ -19,27 +19,20 @@ public class ProductGroupEntity extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 10)
-    private String code;
-
     @Column(nullable = false, length = 50)
     private String name;
 
     @Builder
     private ProductGroupEntity(
-            String code,
             String name
     ) {
-        this.code = code;
         this.name = name;
     }
 
     public static ProductGroupEntity create(
-            String code,
             String name
     ) {
         return ProductGroupEntity.builder()
-                .code(code)
                 .name(name)
                 .build();
     }

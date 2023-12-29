@@ -32,5 +32,5 @@ public class ProductEntity extends BaseEntity {
     private Integer stock;
 
     @Embedded
-    private ProductInfo productInfo;
+    private ProductSpec productInfo;
 }

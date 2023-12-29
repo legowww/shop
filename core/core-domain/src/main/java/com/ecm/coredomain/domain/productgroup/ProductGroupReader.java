@@ -14,11 +14,9 @@ public class ProductGroupReader {
     private final ProductGroupSearchDao productSearchDao;
 
     @Transactional(readOnly = true)
-    public ProductGroupSearchResponse read(
-            String inputText,
-            Integer page,
-            Integer size
+    public List<ProductGroup> read(
+            String inputText
     ) {
-        return productSearchDao.searchThroughInputText(inputText, page, size);
+        return productSearchDao.searchThroughInputText(inputText);
     }
 }

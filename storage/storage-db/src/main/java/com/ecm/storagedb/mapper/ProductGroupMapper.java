@@ -12,6 +12,6 @@ public final class ProductGroupMapper {
     public static ProductGroup mapToDomain(
             ProductGroupEntity entity
     ) {
-        return new ProductGroup(entity.getId(), entity.getCode(), entity.getName());
+        return new ProductGroup(entity.getId(), entity.getName());
     }
 }

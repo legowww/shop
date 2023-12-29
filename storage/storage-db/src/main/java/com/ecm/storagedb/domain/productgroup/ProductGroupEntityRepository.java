@@ -5,7 +5,6 @@ import com.ecm.coredomain.domain.productgroup.ProductGroupRepository;
 import com.ecm.storagedb.mapper.ProductGroupMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
@@ -13,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductGroupEntityRepository implements ProductGroupRepository {
 
     private final ProductGroupJpaRepository productGroupJpaRepository;
-    @Transactional
+
     @Override
     public ProductGroup save(
             String code,
             String name
     ) {
         ProductGroupEntity productGroupEntity = productGroupJpaRepository.save(
-                ProductGroupEntity.create(code, name)
+                ProductGroupEntity.create(name)
         );
 
         return ProductGroupMapper.mapToDomain(productGroupEntity);
