@@ -1,0 +1,5 @@
+###
+GET http://localhost:8080/v1/product-search?keyword=노스페이스
+
+###
+GET http://localhost:8080/v1/products/1

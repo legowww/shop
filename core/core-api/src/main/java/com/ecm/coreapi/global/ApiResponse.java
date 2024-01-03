@@ -1,4 +1,4 @@
-package com.ecm.coreapi.controller.global;
+package com.ecm.coreapi.global;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,0 @@
-package com.ecm.coredomain.domain.product;
-
-import java.util.List;
-
-public record LowPriceProductSearchResponse(
-        List<ProductGroupMainLowPriceProduct> productGroupMainLowPriceProducts
-) {
-}

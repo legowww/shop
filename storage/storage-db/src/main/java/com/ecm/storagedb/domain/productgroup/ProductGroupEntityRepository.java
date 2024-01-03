@@ -2,7 +2,6 @@ package com.ecm.storagedb.domain.productgroup;
 
 import com.ecm.coredomain.domain.productgroup.ProductGroup;
 import com.ecm.coredomain.domain.productgroup.ProductGroupRepository;
-import com.ecm.storagedb.mapper.ProductGroupMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

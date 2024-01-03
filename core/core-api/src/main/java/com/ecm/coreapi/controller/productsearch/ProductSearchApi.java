@@ -1,9 +1,9 @@
-package com.ecm.coreapi.controller.product;
+package com.ecm.coreapi.controller.productsearch;
 
 
-import com.ecm.coreapi.controller.global.ApiResponse;
-import com.ecm.coredomain.domain.product.LowPriceProductSearchResponse;
-import com.ecm.coredomain.domain.product.ProductService;
+import com.ecm.coreapi.global.ApiResponse;
+import com.ecm.coredomain.domain.product.ProductSearchService;
+import com.ecm.coredomain.domain.product.reponse.KeywordSearchResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/v1/product-search")
 @RestController
-public class ProductSearchApiController {
+public class ProductSearchApi {
 
-    private final ProductService productService;
+    private final ProductSearchService productSearchService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<LowPriceProductSearchResponse>> search(
+    public ResponseEntity<ApiResponse<KeywordSearchResponse>> search(
             @RequestParam String keyword
     ) {
-        LowPriceProductSearchResponse response = productService.keywordSearch(keyword);
+        KeywordSearchResponse response = productSearchService.keywordSearch(keyword);
 
         return ResponseEntity.ok(ApiResponse.ok(response));
     }

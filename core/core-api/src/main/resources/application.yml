@@ -5,13 +5,21 @@ spring:
   config:
     import:
       - db.yml
-
+      - cache.yml
 ---
 spring:
   config:
     activate:
       on-profile: local
-
+server:
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 5
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
 ---
 spring:
   config:

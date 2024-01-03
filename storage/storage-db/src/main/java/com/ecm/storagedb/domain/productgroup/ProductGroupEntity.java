@@ -1,6 +1,6 @@
 package com.ecm.storagedb.domain.productgroup;
 
-import com.ecm.storagedb.domain.BaseEntity;
+import com.ecm.storagedb.domain.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

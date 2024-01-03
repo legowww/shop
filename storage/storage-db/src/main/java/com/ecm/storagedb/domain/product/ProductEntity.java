@@ -1,6 +1,6 @@
 package com.ecm.storagedb.domain.product;
 
-import com.ecm.storagedb.domain.BaseEntity;
+import com.ecm.storagedb.domain.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,5 +32,5 @@ public class ProductEntity extends BaseEntity {
     private Integer stock;
 
     @Embedded
-    private ProductSpec productInfo;
+    private ProductSpec productSpec;
 }

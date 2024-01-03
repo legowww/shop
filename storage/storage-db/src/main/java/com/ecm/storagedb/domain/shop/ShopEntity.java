@@ -1,7 +1,7 @@
 package com.ecm.storagedb.domain.shop;
 
 
-import com.ecm.storagedb.domain.BaseEntity;
+import com.ecm.storagedb.domain.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

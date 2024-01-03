@@ -1,4 +1,4 @@
-package com.ecm.coreapi.controller.global;
+package com.ecm.coreapi.global;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

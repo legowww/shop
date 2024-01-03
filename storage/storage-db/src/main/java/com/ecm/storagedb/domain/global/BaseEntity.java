@@ -1,4 +1,4 @@
-package com.ecm.storagedb.domain;
+package com.ecm.storagedb.domain.global;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
