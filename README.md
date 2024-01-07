@@ -4,7 +4,7 @@
 ## 네트워크 구성
 <img width="810" alt="result1" src="https://github.com/legowww/shop/assets/70372188/ad0e5642-eee9-4079-9766-9f9010cd4bda">
 
-## 사용 기술
+## 기술
 - Nginx
 - Spring Boot 3.2
   - Caffine Cache
@@ -16,8 +16,18 @@
 - MySQL 의 Full-text-Search(n-gram parser)를 이용한 검색 구현
 - Spring 의 고성능 캐시 라이브러리인 Caffaine Cache 를 이용한 검색 결과 캐싱  
 - Redis 의 Sorted Set 자료구조를 이용하여 상품 그룹 별 최저가 상품 정보 조회 구현
-- gzip, cache 을 적용한 후 Locust 를 통해 성능 테스트 수행
+- gzip, ETag,캐싱을 통한 성능 개선
 
+![image](https://github.com/legowww/shop/assets/70372188/d7619524-6e96-44f2-a4e1-2ff94abcd2b3)
+
+
+
+## 성능 개선
+
+### 캐싱
+<details>
+<summary>상품 검색 후, 최저가 상품 JSON 반환값</summary>
+  
 ```json
 {
     "status": 200,
@@ -127,3 +137,74 @@
     "serverDateTime": "2024-01-06T18:34:35"
 }
 ```
+
+</details>
+
+productGroup
+- Data: 검색어에 해당하는 productGroup 데이터
+- Cache Read: Look Aside 패턴
+- Cache Write: Write Around 패턴
+
+product  
+- Data: productPreviews 데이터
+- Cache Read: Look Aside 패턴 적용
+- Cache Write: 상품 등록 시, 속한 productGroup 사이에서 최저가 5등안에 들 경우 캐시/DB 동시에 저장, 아닐 경우 DB 에만 저장
+  
+
+### gzip
+네트워크 비용을 절감시키기 위하여 `application/json` 응답값에 대해 gzip 압축을 적용함 
+
+Locust 를 활용한 성능 테스트에서는 적용되지 않는 문제점이 있었지만, 웹 브라우저를 통해 파일이 압축됐음을 확인함
+
+| 적용 전| 적용 후  |
+|---|---|
+| 1247Bytes  | 617Bytes  |
+
+
+### ETag
+정적 리소스인 HTML 파일에 대해서는 조건부 캐싱 요청을 사용하기 위해 ETag 를 적용함
+
+## 성능 테스트
+
+### 환경
+- 프리티어 EC2
+- Product 레코드 20만개 설정
+- 성능 테스트 도구는 Locust 사용
+
+
+### 캐싱 적용 전
+쿠팡, 지마켓 등의 사이트에서 상품 검색 시 소요되는 응답 시간을 확인한 결과, 800ms~1600ms 사이의 응답시간을 가짐을 확인함
+
+이와 비슷한 응답시간을 가지기 위해서는 현재 시스템은 VUser 값을 16명으로 테스트했을 때, 5.2 RPS 의 처리량을 보장함
+
+
+| VUser | Average Response Time  | RPS | 
+|---|---|---|
+| 16  | 1574ms  | 5.2|
+
+### 캐싱 적용 후
+![image](https://github.com/legowww/shop/assets/70372188/00a20b32-8b4c-459f-b7f4-ac4fa07bf230)
+![image](https://github.com/legowww/shop/assets/70372188/65c38a8a-86d1-4a55-afe9-a757f6bf02d7)
+
+| VUser | Average Response Time  | RPS | 
+|---|---|---|
+| 300  | 206ms  | 162.2|
+
+위의 차트에서 볼 수 있듯, cache miss 가 빈번하게 발생한 후 일정 구간이 지난 후 부터는 처리량과 응답 속도가 일정해진 것을 볼 수 있다.
+즉, 어느 순간부터는 모든 GET 요청에 대해 cache hit 이 적용됐다고 해석할 수 있다. 덕분에 VUser 를 300명으로 늘려도 큰 문제가 없었다.
+
+하지만 위의 결과는 테스트 특성상 cache hit 비율이 100%가 됐기 때문에 비현실적인 성능 개선이 이뤄진 경우이다.
+
+실제 환경에서는 자주 사용되는 검색어나 상품들은 로깅을 통해 알아내어 cache hit 비율을 70% 정도까지만 향상시켜도 기존 시스템에 비해 큰 성능 향상을 할 수 있을것이라고 생각한다.
+
+
+
+
+
+
+
+
+
+
+
+
