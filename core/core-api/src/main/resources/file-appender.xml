@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+    <property name="home" value="log/" />
+
+    <!--  appender이름이 file인 consoleAppender를 선언  -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--로깅 파일이 일정 크기 또는 일정 시간이 되면 다른 파일로 만들어 준다.-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--로깅이 기록될 위치-->
+            <fileNamePattern>${home}/file-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <!--로그 파일 최대 크기 10MB-->
+            <maxFileSize>10MB</maxFileSize>
+            <!--로그 파일 최대 보관 일수 60일-->
+            <maxHistory>60</maxHistory>
+            <!--모든 로그 파일 총 크기 2GB 제한-->
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+</included>

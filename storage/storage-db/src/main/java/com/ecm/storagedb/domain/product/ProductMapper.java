@@ -1,19 +1,19 @@
 package com.ecm.storagedb.domain.product;
 
+import com.ecm.coredomain.domain.product.ProductPreview;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ProductMapper {
 
-//    public static ProductGroup mapToDomain(
-//            ProductEntity entity
-//    ) {
-//        return new Product(
-//                entity.getId(),
-//                entity.getProductGroupId(),
-//                entity.getShopId(),
-//                en
-//        )
-//    }
+    public static ProductPreview mapToDomain(
+            ProductEntity entity
+    ) {
+        return new ProductPreview(
+                entity.getId(),
+                entity.getName(),
+                entity.getPrice()
+        );
+    }
 }

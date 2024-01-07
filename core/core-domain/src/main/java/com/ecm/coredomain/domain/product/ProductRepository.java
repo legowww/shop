@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface ProductRepository {
 
-     Product findById(Long productId);
+     ProductWithShop findById(Long productId);
 
-     List<ProductPreview> findLowPriceProductsByGrpId(Long productGroupId, Integer size);
+     ProductPreview save(ProductInfo productInfo);
+
+     List<ProductPreview> findLowPriceProducts(Long productGroupId, Integer size);
 }

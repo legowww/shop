@@ -36,6 +36,9 @@ subprojects {
     dependencies {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+
+        implementation 'ch.qos.logback:logback-core'
+        implementation 'ch.qos.logback:logback-classic'
     }
 
     tasks.register("prepareKotlinBuildScriptModel") {}

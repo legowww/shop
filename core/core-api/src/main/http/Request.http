@@ -2,4 +2,20 @@
 GET http://localhost:8080/v1/product-search?keyword=노스페이스
 
 ###
-GET http://localhost:8080/v1/products/1
+GET http://localhost:8080/v1/product-search/no-cache?keyword=노스페이스
+
+###
+GET http://localhost:8080/v1/products/23423
+
+
+###
+POST http://localhost:8080/v1/products
+Content-Type: application/json
+
+{
+  "productGroupId": 1,
+  "shopId": 1,
+  "price": 3000,
+  "stock": 1,
+  "name": "노스페이스 1996"
+}

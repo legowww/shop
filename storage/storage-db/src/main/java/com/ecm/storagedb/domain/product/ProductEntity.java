@@ -3,6 +3,7 @@ package com.ecm.storagedb.domain.product;
 import com.ecm.storagedb.domain.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,12 +26,18 @@ public class ProductEntity extends BaseEntity {
     @Column(nullable = false, columnDefinition = "int unsigned")
     private Integer price;
 
-    @Column(nullable = false, columnDefinition = "double unsigned")
-    private Double discountRate;
-
     @Column(nullable = false, columnDefinition = "int unsigned")
     private Integer stock;
 
-    @Embedded
-    private ProductSpec productSpec;
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @Builder
+    public ProductEntity(Long productGroupId, Long shopId, Integer price, Integer stock, String name) {
+        this.productGroupId = productGroupId;
+        this.shopId = shopId;
+        this.price = price;
+        this.stock = stock;
+        this.name = name;
+    }
 }

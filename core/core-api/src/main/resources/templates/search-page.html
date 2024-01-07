@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .form-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-inline input {
+            width: 300px;
+        }
+        .form-inline button {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-center">
+        <form th:action="@{/v1/product-search}" method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="input search keyword" aria-label="Search" th:name="keyword">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

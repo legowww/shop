@@ -1,8 +1,7 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     //storage-db 모듈의 코드는 runtime 시점에만 필요하다.
     //하지만 db.yml 파일을 알기 위해서는 compile 의존성이 필요하여 implementation 사용

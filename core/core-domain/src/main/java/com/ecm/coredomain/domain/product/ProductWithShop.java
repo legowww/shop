@@ -3,14 +3,12 @@ package com.ecm.coredomain.domain.product;
 
 import java.time.LocalDateTime;
 
-public record Product(
+public record ProductWithShop(
         Long id,
         Long shopId,
         String shopName,
         Integer price,
-        Double discountRate,
         String name,
-        String description,
         LocalDateTime createdAt
 ) {
 }

@@ -1,6 +1,6 @@
 package com.ecm.storagedb.domain.product;
 
-import com.ecm.coredomain.domain.product.Product;
+import com.ecm.coredomain.domain.product.ProductWithShop;
 import com.ecm.coredomain.domain.product.ProductPreview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,19 +12,19 @@ public interface ProductEntityJpaRepository extends JpaRepository<ProductEntity,
 
     @Query(
             value = """
-                    SELECT new com.ecm.coredomain.domain.product.Product
-                    (p.id, s.id, s.name, p.price, p.discountRate, p.productSpec.name, p.productSpec.description, p.createdAt)
+                    SELECT new com.ecm.coredomain.domain.product.ProductWithShop
+                    (p.id, s.id, s.name, p.price, p.name, p.createdAt)
                     from ProductEntity p
                     join ShopEntity s on p.shopId = s.id
                     where p.id = :productId
     """
     )
-    Optional<Product> findByProductId(Long productId);
+    Optional<ProductWithShop> findByProductId(Long productId);
 
     @Query(
             value = """
                     SELECT new com.ecm.coredomain.domain.product.ProductPreview
-                    (p.id, s.id, s.name, p.productSpec.name, p.price)
+                    (p.id, p.name, p.price)
                     from ProductEntity p
                     join ShopEntity s on p.shopId = s.id
                     where p.productGroupId = :productGroupId
@@ -33,4 +33,15 @@ public interface ProductEntityJpaRepository extends JpaRepository<ProductEntity,
     """
     )
     List<ProductPreview> findLowPriceProductsByProductGroupId(Long productGroupId, Integer size);
+
+    @Query(
+            value = """
+                    SELECT new com.ecm.coredomain.domain.product.ProductPreview
+                    (p.id, p.name, p.price)
+                    from ProductEntity p
+                    join ShopEntity s on p.shopId = s.id
+                    where p.productGroupId = :productGroupId
+    """
+    )
+    List<ProductPreview> findAllByProductGroupId(Long productGroupId);
 }

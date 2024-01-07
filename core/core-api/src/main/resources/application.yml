@@ -1,28 +1,44 @@
 spring:
   profiles:
-    default: local
+    default: dev
 
   config:
     import:
       - db.yml
       - cache.yml
+
+  datasource:
+    hikari:
+      maximum-pool-size: 30
+      connection-timeout: 5000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  tomcat:
+    threads:
+      min-spare: 20
+
 ---
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: dev
+
 server:
   compression:
     enabled: true
     mime-types: application/json
     min-response-size: 5
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
+
 ---
 spring:
   config:
     activate:
-      on-profile: test
+      on-profile: dev-no-cache
 
