@@ -154,25 +154,20 @@
 ---
 
 ### 캐싱 적용 후
-#### 검색어 캐싱
+#### 검색어 캐싱(Caffaine Cache)
 <img width="909" alt="f2" src="https://github.com/legowww/shop/assets/70372188/0c05c845-f3ad-48ea-8594-6f309987df22">
 
 | KEY | VALUE |
 |---|---|
 | 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
 
-Caffaine Cache 에 저장
-
-##### 최저가 상품 캐싱
+##### 최저가 상품 캐싱(Redis)
 <img width="895" alt="f3" src="https://github.com/legowww/shop/assets/70372188/32c88206-6bfa-490e-8187-6b3b76a22c25">
 
 | KEY | VALUE |
 |---|---|
 | ProductGroupId | List<ProductPreview>(productId, productName, productPrice) |
 
-최저가 가격 순으로 정렬된 5개의 데이터를 Redis 의 SortedSet 자료구조에 저장
-
-![image](https://github.com/legowww/shop/assets/70372188/00a20b32-8b4c-459f-b7f4-ac4fa07bf230)
 ![image](https://github.com/legowww/shop/assets/70372188/65c38a8a-86d1-4a55-afe9-a757f6bf02d7)
 
 | VUser | Average Response Time  | RPS | 
