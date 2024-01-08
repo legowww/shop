@@ -158,15 +158,13 @@
 | KEY | VALUE |
 |---|---|
 | 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
-
-- 하나의 검색어에 대한 productGroupId 들을 Caffaine Cache 에 저장
+Caffaine Cache 에 저장
 
 ##### 최저가 상품 캐싱
 | KEY | VALUE |
 |---|---|
 | ProductGroupId | List<ProductPreview>(productId, productName, productPrice) |
-
-- 하나의 ProductGroupId 당 5개의 productPrice 를 Redis 의 SortedSet 자료구조에 저장
+최저가 가격 순으로 정렬된 5개의 데이터를 Redis 의 SortedSet 자료구조에 저장
 
 ![image](https://github.com/legowww/shop/assets/70372188/00a20b32-8b4c-459f-b7f4-ac4fa07bf230)
 ![image](https://github.com/legowww/shop/assets/70372188/65c38a8a-86d1-4a55-afe9-a757f6bf02d7)
@@ -189,7 +187,7 @@
 |---|---|
 | 1247Bytes  | 617Bytes  |
 
-서버 응답 데이터 전송 시 발생하는 네트워크 비용을 절감시키기 위해 `application/json`MIME 에 대해 gzip 압축을 적용 
+서버 응답 데이터 전송 시 발생하는 네트워크 비용을 절감시키기 위해 `application/json` MIME 에 대해 gzip 압축을 적용 
 
 ### ETag
 정적 리소스인 HTML 파일에 대해서는 조건부 캐싱 요청을 사용하기 위해 ETag 를 적용함
