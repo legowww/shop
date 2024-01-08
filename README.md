@@ -158,12 +158,14 @@
 | KEY | VALUE |
 |---|---|
 | 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
+
 Caffaine Cache 에 저장
 
 ##### 최저가 상품 캐싱
 | KEY | VALUE |
 |---|---|
 | ProductGroupId | List<ProductPreview>(productId, productName, productPrice) |
+
 최저가 가격 순으로 정렬된 5개의 데이터를 Redis 의 SortedSet 자료구조에 저장
 
 ![image](https://github.com/legowww/shop/assets/70372188/00a20b32-8b4c-459f-b7f4-ac4fa07bf230)
