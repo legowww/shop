@@ -161,7 +161,7 @@
 |---|---|
 | 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
 
-##### 최저가 상품 캐싱(Redis)
+#### 최저가 상품 캐싱(Redis)
 <img width="895" alt="f3" src="https://github.com/legowww/shop/assets/70372188/32c88206-6bfa-490e-8187-6b3b76a22c25">
 
 | KEY | VALUE |
