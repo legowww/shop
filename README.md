@@ -157,16 +157,10 @@
 #### 검색어 캐싱(Caffaine Cache)
 <img width="909" alt="f2" src="https://github.com/legowww/shop/assets/70372188/0c05c845-f3ad-48ea-8594-6f309987df22">
 
-| KEY | VALUE |
-|---|---|
-| 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
 
 #### 최저가 상품 캐싱(Redis)
 <img width="895" alt="f3" src="https://github.com/legowww/shop/assets/70372188/32c88206-6bfa-490e-8187-6b3b76a22c25">
 
-| KEY | VALUE |
-|---|---|
-| ProductGroupId | List<ProductPreview>(productId, productName, productPrice) |
 
 ![image](https://github.com/legowww/shop/assets/70372188/65c38a8a-86d1-4a55-afe9-a757f6bf02d7)
 
@@ -174,12 +168,11 @@
 |---|---|---|
 | 300  | 206ms  | 162.2|
 
-위의 차트에서 볼 수 있듯, cache miss 가 빈번하게 발생한 후 일정 구간이 지난 후 부터는 처리량과 응답 속도가 일정해진 것을 볼 수 있다.
-즉, 어느 순간부터는 모든 GET 요청에 대해 cache hit 이 적용됐다고 해석할 수 있다. 덕분에 VUser 를 300명으로 늘려도 큰 문제가 없었다.
+위 차트를 살펴보면, cache miss가 잦게 발생한 후 일정 시간이 흐른 뒤에는 처리량과 응답 속도가 안정적으로 보이는 것을 확인할 수 있다. 
+이는 모든 GET 요청에 대하여 어느 시점부터 cache hit이 적용되었다는 것을 의미하며, 이로 인해 VUser 수를 300명까지 늘려도 문제가 발생하지 않았다.
 
-하지만 위의 결과는 테스트 특성상 cache hit 비율이 100%가 됐기 때문에 비현실적인 성능 개선이 이뤄진 경우이다.
-
-실제 환경에서는 자주 사용되는 검색어나 상품들은 로깅을 통해 알아내어 cache hit 비율을 70% 정도까지만 향상시켜도 기존 시스템에 비해 큰 성능 향상을 할 수 있을것이라고 생각한다.
+그러나 이러한 결과는 테스트의 특성상 cache hit 비율이 100%에 달했기 때문에 나온 결과이며, 현실에서는 이와 같은 성능 개선이 일어나기 어렵다는 점을 고려해야 한다.
+실제 상황에서는 자주 사용되는 검색어 혹은 상품 정보를 로그를 통해 파악하고, 이를 통해 cache hit 비율을 대략 70% 정도로만 유지해도 기존 시스템에 비해 상당한 성능 향상을 기대할 수 있을 것이라 생각된다.
 
 ## 기타 성능 개선
 
