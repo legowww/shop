@@ -1,3 +1,12 @@
+## 설명
+- MySQL 의 Full-text-Search(n-gram parser)를 이용한 검색 구현
+- Spring 의 고성능 캐시 라이브러리인 Caffaine Cache 를 이용한 검색 결과 캐싱  
+- Redis 의 Sorted Set 자료구조를 이용하여 상품 그룹 별 최저가 상품 정보 조회 구현
+- gzip, ETag,캐싱을 통한 성능 개선
+- Locust 를 통한 Stress Test 수행
+
+![image](https://github.com/legowww/shop/assets/70372188/d7619524-6e96-44f2-a4e1-2ff94abcd2b3)
+
 ## 아키텍처
 <img width="953" alt="result2" src="https://github.com/legowww/shop/assets/70372188/bc8d1cab-a0ae-4b5e-9026-da18f9dab906">
 
@@ -11,15 +20,6 @@
 - MySQL 8.0.35
 - Docker
 - Redis
-
-## 설명
-- MySQL 의 Full-text-Search(n-gram parser)를 이용한 검색 구현
-- Spring 의 고성능 캐시 라이브러리인 Caffaine Cache 를 이용한 검색 결과 캐싱  
-- Redis 의 Sorted Set 자료구조를 이용하여 상품 그룹 별 최저가 상품 정보 조회 구현
-- gzip, ETag,캐싱을 통한 성능 개선
-
-![image](https://github.com/legowww/shop/assets/70372188/d7619524-6e96-44f2-a4e1-2ff94abcd2b3)
-
 
 
 ## 성능 개선
