@@ -142,7 +142,7 @@
 - EC2 t2.micro
 - Product 레코드 20만개
 
-### 기존 시스템
+### 캐싱 적용 전
 쿠팡, 지마켓 등의 사이트에서 상품 검색 시 소요되는 응답 시간을 확인한 결과, 800ms~1600ms 사이의 응답시간을 가짐을 확인함 
 이와 비슷한 응답시간을 가지기 위해서는 현재 시스템은 VUser 값을 16명으로 테스트했을 때, 5.2 RPS 의 처리량을 보장함
 
@@ -151,18 +151,22 @@
 |---|---|---|
 | 16  | 1574ms  | 5.2|
 
-### 캐싱 적용
+---
 
-productGroup
-- Data: 검색어에 해당하는 productGroup 데이터
-- Cache Read: Look Aside 패턴
-- Cache Write: Write Around 패턴
+### 캐싱 적용 후
+#### 검색어 캐싱
+| KEY | VALUE |
+|---|---|
+| 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
 
-product  
-- Data: productPreviews 데이터
-- Cache Read: Look Aside 패턴 적용
-- Cache Write: 상품 등록 시, 속한 productGroup 사이에서 최저가 5등안에 들 경우 캐시/DB 동시에 저장, 아닐 경우 DB 에만 저장
+- 하나의 검색어에 대한 productGroupId 들을 Caffaine Cache 에 저장
 
+##### 최저가 상품 캐싱
+| KEY | VALUE |
+|---|---|
+| ProductGroupId | List<ProductPreview>(productId, productName, productPrice) |
+
+- 하나의 ProductGroupId 당 5개의 productPrice 를 Redis 의 SortedSet 자료구조에 저장
 
 ![image](https://github.com/legowww/shop/assets/70372188/00a20b32-8b4c-459f-b7f4-ac4fa07bf230)
 ![image](https://github.com/legowww/shop/assets/70372188/65c38a8a-86d1-4a55-afe9-a757f6bf02d7)
@@ -189,45 +193,7 @@ product
 
 ### ETag
 정적 리소스인 HTML 파일에 대해서는 조건부 캐싱 요청을 사용하기 위해 ETag 를 적용함
-```java
-package com.ecm.coreapi.global;
 
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.CacheControl;
-import org.springframework.web.filter.ShallowEtagHeaderFilter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.mvc.WebContentInterceptor;
-
-import java.time.Duration;
-
-@Configuration
-@EnableWebMvc
-public class WebMvcConfig implements WebMvcConfigurer {
-
-    @Override
-    public void addInterceptors(final InterceptorRegistry registry) {
-        WebContentInterceptor interceptor = new WebContentInterceptor();
-        CacheControl cacheControl = CacheControl.maxAge(Duration.ofDays(365)).cachePrivate();
-        interceptor.addCacheMapping(cacheControl, "/");
-        registry.addInterceptor(interceptor);
-    }
-
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean(){
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
-        registration.setFilter(shallowEtagHeaderFilter);
-        registration.addUrlPatterns("/");
-
-        return registration;
-    }
-}
-
-```
 
 
 
