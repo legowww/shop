@@ -5,7 +5,7 @@
 - gzip, ETag,캐싱을 통한 성능 개선
 - Locust 를 통한 Stress Test 수행
 
-![image](https://github.com/legowww/shop/assets/70372188/d7619524-6e96-44f2-a4e1-2ff94abcd2b3)
+<img width="824" alt="f1" src="https://github.com/legowww/shop/assets/70372188/f117c6f6-6417-4111-8b5e-c6c27d50a5f9">
 
 <details>
 <summary>상품 검색 JSON 반환값</summary>
@@ -155,6 +155,8 @@
 
 ### 캐싱 적용 후
 #### 검색어 캐싱
+<img width="909" alt="f2" src="https://github.com/legowww/shop/assets/70372188/0c05c845-f3ad-48ea-8594-6f309987df22">
+
 | KEY | VALUE |
 |---|---|
 | 검색어 | List<ProductGroups>(productGroupId, productGroupName) |
@@ -162,6 +164,8 @@
 Caffaine Cache 에 저장
 
 ##### 최저가 상품 캐싱
+<img width="895" alt="f3" src="https://github.com/legowww/shop/assets/70372188/32c88206-6bfa-490e-8187-6b3b76a22c25">
+
 | KEY | VALUE |
 |---|---|
 | ProductGroupId | List<ProductPreview>(productId, productName, productPrice) |
