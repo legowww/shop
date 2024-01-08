@@ -5,10 +5,9 @@
 - gzip, ETag,캐싱을 통한 성능 개선
 - Locust 를 통한 Stress Test 수행
 
-<img width="824" alt="f1" src="https://github.com/legowww/shop/assets/70372188/f117c6f6-6417-4111-8b5e-c6c27d50a5f9">
-
+### 상품 검색 결과
 <details>
-<summary>상품 검색 JSON 반환값</summary>
+<summary>JSON</summary>
   
 ```json
 {
@@ -146,6 +145,7 @@
 쿠팡, 지마켓 등의 사이트에서 상품 검색 시 소요되는 응답 시간을 확인한 결과, 800ms~1600ms 사이의 응답시간을 가짐을 확인함 
 이와 비슷한 응답시간을 가지기 위해서는 현재 시스템은 VUser 값을 16명으로 테스트했을 때, 5.2 RPS 의 처리량을 보장함
 
+<img width="824" alt="f1" src="https://github.com/legowww/shop/assets/70372188/f117c6f6-6417-4111-8b5e-c6c27d50a5f9">
 
 | VUser | Average Response Time  | RPS | 
 |---|---|---|
