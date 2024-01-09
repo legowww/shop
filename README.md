@@ -1,4 +1,4 @@
-## 설명
+## 📌 프로젝트 구현
 - MySQL 의 Full-text-Search(n-gram parser)를 이용한 검색 구현
 - Spring 의 고성능 캐시 라이브러리인 Caffaine Cache 를 이용한 검색 결과 캐싱  
 - Redis 의 Sorted Set 자료구조를 이용하여 상품 그룹 별 최저가 상품 정보 조회 구현
@@ -122,20 +122,20 @@
 </details>
 
 
-## 아키텍처
+## 🏛️ 아키텍처
 <img width="953" alt="result2" src="https://github.com/legowww/shop/assets/70372188/bc8d1cab-a0ae-4b5e-9026-da18f9dab906">
 
-## 네트워크 구성
+## 🛜 네트워크 구성
 <img width="810" alt="result1" src="https://github.com/legowww/shop/assets/70372188/ad0e5642-eee9-4079-9766-9f9010cd4bda">
 
-## 기술
+## 🔨 기술
 - Nginx
 - Spring Boot 3.2
 - MySQL 8.0.35
 - Docker
 - Redis
 
-## 캐싱 적용 & 성능 테스트
+## ✅ 캐싱 적용 & 성능 테스트
 
 ### 환경
 - EC2 t2.micro
@@ -172,7 +172,7 @@
 그러나 이러한 결과는 테스트의 특성상 cache hit 비율이 100%에 달했기 때문에 나온 결과이며, 현실에서는 이와 같은 성능 개선이 일어나기 어렵다는 점을 고려해야 한다.
 실제 상황에서는 자주 사용되는 검색어 혹은 상품 정보를 로그를 통해 파악하고, 이를 통해 cache hit 비율을 대략 70% 정도로만 유지해도 기존 시스템에 비해 상당한 성능 향상을 기대할 수 있을 것이라 생각된다.
 
-## 기타 성능 개선
+## ✅ 기타 성능 개선
 
 ### gzip
 | 적용 전| 적용 후  |
