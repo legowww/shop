@@ -149,7 +149,7 @@
 | 16  | 1574ms  | 5.2|
 
 <img width="824" alt="f1" src="https://github.com/legowww/shop/assets/70372188/f117c6f6-6417-4111-8b5e-c6c27d50a5f9">
----
+
 
 ### 캐싱 적용 후
 #### 검색어 캐싱(Caffaine Cache)
