@@ -1,5 +1,5 @@
 ## 📌 프로젝트 구현
-- MySQL 의 Full-text-Search(n-gram parser)를 이용한 검색 구현
+- MySQL 의 Full-text-Search(n-gram parser)를 이용한 상품 검색 구현
 - Spring 의 고성능 캐시 라이브러리인 Caffaine Cache 를 이용한 검색 결과 캐싱  
 - Redis 의 Sorted Set 자료구조를 이용하여 상품 그룹 별 최저가 상품 정보 조회 구현
 - gzip, ETag,캐싱을 통한 성능 개선
